@@ -58,7 +58,7 @@ jobs:
         run: docker build -t proshop-${{ matrix.service }}:scan ./${{ matrix.service }}
 
       - name: Vulnerability report
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: proshop-${{ matrix.service }}:scan
           format: table
@@ -66,7 +66,7 @@ jobs:
           exit-code: '0'
 
       - name: Fail on critical vulnerabilities
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: proshop-${{ matrix.service }}:scan
           format: table
