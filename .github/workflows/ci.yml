@@ -44,3 +44,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
         working-directory: backend
+
+  security-scan:
+    name: Image security scan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [backend, frontend]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t proshop-${{ matrix.service }}:scan ./${{ matrix.service }}
+
+      - name: Vulnerability report
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: proshop-${{ matrix.service }}:scan
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: '0'
+
+      - name: Fail on critical vulnerabilities
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: proshop-${{ matrix.service }}:scan
+          format: table
+          severity: CRITICAL
+          ignore-unfixed: true
+          exit-code: '1'
+
+  secrets-scan:
+    name: Secrets scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
