@@ -1,5 +1,7 @@
 # ProShop eCommerce Platform (v2)
 
+![CI](https://github.com/QALAWFI/proshop-devops/actions/workflows/ci.yml/badge.svg)
+
 > eCommerce platform built with the MERN stack & Redux.
 
 <img src="./frontend/public/images/screens.png">
