@@ -7,6 +7,9 @@
 
 A production-grade DevOps pipeline built around a full-stack MERN e-commerce application — containerized, continuously integrated, security-scanned, and automatically deployed to AWS, with a parallel Kubernetes deployment running on a self-hosted cluster.
 
+<img src="./frontend/public/images/screens.png" alt="ProShop screens" />
+
+
 > The application code is based on [ProShop v2](https://github.com/bradtraversy/proshop-v2) by Brad Traversy.
 > All DevOps engineering — containerization, CI/CD, cloud infrastructure, TLS, and Kubernetes — is my own work.
 
